@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
-    "storybook": "storybook start -p 7007"
+    "storybook": "storybook start -p 7007",
+    "test:debugger": "node --debug-brk ./node_modules/.bin/jest --runInBand & node-inspector"
   },
   "dependencies": {
     "react": "~15.4.0",
