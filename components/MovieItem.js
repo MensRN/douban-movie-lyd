@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
 } from 'react-native';
 
 const propTypes = {
@@ -47,11 +47,11 @@ class MovieItem extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 0,
+    alignItems: 'center',
     alignSelf: 'stretch',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     backgroundColor: '#f0f0f0',
+    marginBottom: 2,
   },
   cover: {
     width: 65,

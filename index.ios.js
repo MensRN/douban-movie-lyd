@@ -3,7 +3,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  ScrollView,
 } from 'react-native';
 
 import { getCollection } from './utils/api';
@@ -23,13 +24,13 @@ export default class movie extends Component {
     this.setState({ list: topMovies.subjects });
   }
   render() {
-    const testItem = this.state.list[0];
+    const items = this.state.list;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         {
-          testItem && <Item {...parser.movieItem(testItem)} />
+          items.map((x, i) => <Item {...parser.movieItem(x)} key={i} />)
         }
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -37,8 +38,9 @@ export default class movie extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
