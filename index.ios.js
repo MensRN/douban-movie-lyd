@@ -7,20 +7,28 @@ import {
 } from 'react-native';
 
 import { getCollection } from './utils/api';
+import * as parser from './utils/parser';
 
 import Item from './components/MovieItem';
 
 export default class movie extends Component {
+  constructor() {
+    super();
+    this.state = {
+      list: [],
+    };
+  }
   async componentWillMount() {
     const topMovies = await getCollection('top');
+    this.setState({ list: topMovies.subjects });
   }
   render() {
+    const testItem = this.state.list[0];
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to Movie
-        </Text>
-        <Item title="test title" />
+        {
+          testItem && <Item {...parser.movieItem(testItem)} />
+        }
       </View>
     );
   }

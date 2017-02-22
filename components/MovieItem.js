@@ -9,12 +9,20 @@ import {
 
 class MovieItem extends React.Component {
   static propTypes = {
-    title: PropTypes.string
+    id: PropTypes.string,
+    title: PropTypes.string,
+    originalTitle: PropTypes.string,
+    rating: PropTypes.number,
+    genres: PropTypes.array,
+    cover: PropTypes.string,
   }
-  render () {
+
+  render() {
+    const { title, rating } = this.props;
     return (
       <View>
-        <Text>{ this.props.title }</Text>
+        <Text>{rating}</Text>
+        <Text>{title}</Text>
       </View>
     );
   }
