@@ -8,6 +8,8 @@ import {
 
 import { getCollection } from './utils/api';
 
+import Item from './components/MovieItem';
+
 export default class movie extends Component {
   async componentWillMount() {
     const topMovies = await getCollection('top');
@@ -18,6 +20,7 @@ export default class movie extends Component {
         <Text style={styles.welcome}>
           Welcome to Movie
         </Text>
+        <Item title="test title" />
       </View>
     );
   }
