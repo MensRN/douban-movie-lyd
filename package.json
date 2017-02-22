@@ -6,18 +6,21 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
     "storybook": "storybook start -p 7007",
-    "test:debugger": "node --debug-brk ./node_modules/.bin/jest --runInBand & node-inspector"
+    "test:debugger": "node --debug-brk ./node_modules/.bin/jest --runInBand & node-inspector",
+    "ios": "react-native run-ios"
   },
   "dependencies": {
     "react": "~15.4.0",
     "react-native": "0.41.2"
   },
   "devDependencies": {
+    "@kadira/react-native-storybook": "^2.0.0",
     "babel-jest": "18.0.0",
     "babel-preset-react-native": "1.9.1",
+    "eslint": "^3.16.0",
+    "eslint-plugin-react": "^6.10.0",
     "jest": "18.1.0",
-    "react-test-renderer": "~15.4.0",
-    "@kadira/react-native-storybook": "^2.0.0"
+    "react-test-renderer": "~15.4.0"
   },
   "jest": {
     "preset": "react-native"

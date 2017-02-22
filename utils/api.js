@@ -5,12 +5,12 @@ const IS_MOCK = true;
 
 const baseURL = x => `https://api.douban.com/v2/${x}`;
 
-export const COLLECTIONS = {
+export const URLS = {
   top: 'movie/top250',
 };
 
 const fetchWithMock = type => {
-  const KEY = COLLECTIONS[type];
+  const KEY = URLS[type];
   if (IS_MOCK) {
     const mockResult = mock[KEY];
     if (typeof mockResult === 'undefined') return new Error(`MOCK ${type} not found`);
