@@ -7,9 +7,26 @@ const baseURL = x => `https://api.douban.com/v2/${x}`;
 
 export const URLS = {
   top: 'movie/top250',
+  detail: 'movie/subject/:id',
 };
 
-const fetchWithMock = type => {
+const fetchURL = key => fetch(baseURL(key)).then(res => res.json());
+
+// for translate /xxx/asdf/:id => /xxx/asdfas/params.id
+export const transURL = (str, data) => {
+  const matchs = str.match(/\/:\w+/gi);
+  if (!matchs) return str;
+
+  return matchs.reduce((pre, x) => {
+    const key = x.match(/\w+/);
+    const param = data[key]
+    if (param === undefined) return new Error(`${key} not found`);
+
+    return pre.replace(new RegExp(x), `/${param}`);
+  }, str);
+};
+
+const fetchWithMock = (type, params) => {
   const KEY = URLS[type];
   if (IS_MOCK) {
     const mockResult = mock[KEY];
@@ -17,13 +34,16 @@ const fetchWithMock = type => {
     return mockResult;
   }
 
-  return fetch(baseURL(KEY)).then(res => res.json());
+  return fetchURL(transUrl(KEY, params));
 };
 
-export async function getCollection(type) {
+const invokeAPI = async (...params) => {
   try {
-    return await fetchWithMock(type);
+    return await fetchWithMock.apply(null, params);
   } catch(err) {
     console.error(err);
   }
-}
+};
+
+export const getCollection = () => invokeAPI('top');
+export const getDetail = id => invokeAPI('detail', { id });
