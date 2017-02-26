@@ -13,6 +13,7 @@ import { getCollection } from '../utils/api';
 import * as parser from '../utils/parser';
 
 import Item from './MovieItem';
+import Detail from './MovieDetail';
 
 class Home extends React.Component {
   constructor() {
@@ -25,13 +26,23 @@ class Home extends React.Component {
     const topMovies = await getCollection('top');
     this.setState({ list: topMovies.subjects });
   }
+  goDetail(props) {
+    const { title } = props;
+
+    this.props.navigator.push({
+      title,
+      component: Detail,
+      passProps: props,
+    });
+  }
   render () {
     const items = this.state.list;
-    console.log(items);
     return(
       <ScrollView style={styles.container}>
         {
-          items.map((x, i) => <Item {...parser.movieItem(x)} key={i} />)
+          items.map((x, i) => <Item
+            {...parser.movieItem(x)} key={i} onPress={this.goDetail.bind(this)}
+          />)
         }
       </ScrollView>
     )

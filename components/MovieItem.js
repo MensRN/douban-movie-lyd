@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 
 const propTypes = {
@@ -15,23 +16,30 @@ const propTypes = {
   rating: PropTypes.number,
   genres: PropTypes.array,
   cover: PropTypes.string,
+  onPress: PropTypes.func,
 };
 
 class MovieItem extends React.Component {
   static propTypes = propTypes;
 
   render() {
-    const { id, title, originalTitle, rating, genres, cover } = this.props;
+    const { id, title, originalTitle, rating, genres, cover, onPress } = this.props;
 
     return (
       <View style={styles.container}>
         <Image
           style={styles.cover}
           source={{ uri: cover  }}
-        />
+          />
         <View style={styles.info}>
           <Text style={styles.rating}>{rating}</Text>
-          <Text style={styles.title}>{title}</Text>
+          <TouchableHighlight
+            onPress={() => onPress(this.props)} style={{ flex: 1}}
+            underlayColor="#fff"
+          >
+            <Text style={styles.title}>{title}</Text>
+          </TouchableHighlight>
+
           <Text style={styles.des}>{originalTitle}</Text>
           <View style={styles.genres}>
             {
